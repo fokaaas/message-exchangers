@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.stbasarab.prog_2">
 
+    <queries tools:ignore="ExtraText">
+        <package android:name="com.stbasarab.prog_3" />
+    </queries>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
