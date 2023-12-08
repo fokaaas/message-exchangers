@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">prog-1</string>
+    <string name="app_name">Lab6</string>
+    <string name="num_hint">0</string>
+    <string name="n_text">n</string>
+    <string name="min_text">Min</string>
+    <string name="max_text">Max</string>
+    <string name="send">НАДІСЛАТИ</string>
 </resources>
