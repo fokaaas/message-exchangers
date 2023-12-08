@@ -13,6 +13,9 @@ class MainActivity : AppCompatActivity() {
     setContentView(R.layout.activity_main)
     val vector = getVector()
     showVectors(vector)
+    val intent = packageManager.getLaunchIntentForPackage("com.stbasarab.prog_3")
+    intent!!.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+    startActivity(intent)
   }
 
   override fun onNewIntent(intent: Intent?) {
@@ -20,6 +23,9 @@ class MainActivity : AppCompatActivity() {
     setIntent(intent)
     val vector = getVector()
     showVectors(vector)
+    val newIntent = packageManager.getLaunchIntentForPackage("com.stbasarab.prog_3")
+    newIntent!!.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+    startActivity(newIntent)
   }
 
   private fun getVector(): DoubleArray {
