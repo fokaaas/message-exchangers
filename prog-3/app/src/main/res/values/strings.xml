@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">prog-3</string>
+    <string name="app_name">Object3</string>
+    <string name="sort_alert">Дані відсортовано!</string>
 </resources>

@@ -1,31 +1,40 @@
 package com.stbasarab.prog_2
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
+  private lateinit var vector: DoubleArray
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
-    val vector = getVector()
+    vector = getVector()
     showVectors(vector)
-    val intent = packageManager.getLaunchIntentForPackage("com.stbasarab.prog_3")
-    intent!!.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-    startActivity(intent)
   }
 
   override fun onNewIntent(intent: Intent?) {
     super.onNewIntent(intent)
     setIntent(intent)
-    val vector = getVector()
+    vector = getVector()
     showVectors(vector)
-    val newIntent = packageManager.getLaunchIntentForPackage("com.stbasarab.prog_3")
-    newIntent!!.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-    startActivity(newIntent)
+  }
+
+  fun onSortClick(view: View) {
+    val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+    val clip = ClipData.newPlainText("vector", doubleArrayToString(vector, " "))
+    clipboard.setPrimaryClip(clip)
+    val intent = packageManager.getLaunchIntentForPackage("com.stbasarab.prog_3")
+    intent!!.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+    startActivity(intent)
   }
 
   private fun getVector(): DoubleArray {
@@ -43,10 +52,14 @@ class MainActivity : AppCompatActivity() {
     }
   }
 
+  private fun doubleArrayToString(doubleArray: DoubleArray, separator: String): String {
+    val stringList = doubleArray.map { "%.2f".format(it) }
+    return stringList.joinToString(separator)
+  }
+
   private fun showVectors(vector: DoubleArray) {
-    val formattedVector = vector.map { "%.2f".format(it) }
-    val verticalVector = formattedVector.joinToString("\n")
-    val horizontalVector = formattedVector.joinToString(" ")
+    val verticalVector = doubleArrayToString(vector, "\n")
+    val horizontalVector = doubleArrayToString(vector, " ")
     showVectorBox(findViewById(R.id.top_box), verticalVector)
     showVectorBox(findViewById(R.id.bottom_box), horizontalVector)
   }
